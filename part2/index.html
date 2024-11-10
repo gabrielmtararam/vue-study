@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vue Basics</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css"/>
+    <script src="https://unpkg.com/vue@3.4.9/dist/vue.global.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+<header>
+    <h1>Vue Course Goals</h1>
+</header>
+<section id="user-goal">
+    <h2>My Course Goal</h2>
+    <!--  'interpolation'  dentro da section que passei o idass
+     dessa forma que utilizo as propripedades do app
+     só  funciona entre abertura e fechamento de tags htmls
+     se eu tentar utilizar em um atritubo não funciona
+     ex href="{{teste}}" não substitui, para isso utilizar bind directive
+     v-bind:href="teste"
+     use v-html para strings que precisem ser renderizadas como html
+     evitar utilizar por segurança
+
+     -->
+    <!--    i can set css style and class using cammelCase that turns into kebab case and works-->
+    <!--    like an javascript object-->
+    <div class="clickable-box" :style="{borderColor: boxASelected ? 'red' : 'blue'}" @click="selectBox('A')"></div>
+    <div :class="boxBSelected ? 'clickable-box active' : 'clickable-box'" @click="selectBox('B')"></div>
+    <div :class="{'clickable-box':true, active: boxCSelected}" @click="selectBox('C')"></div>
+    <!--    posso passar um vetor, com string e objeto também
+    <div :class="['clickable-box', {active: boxCSelected}" @click="selectBox('C')"></div>-->
+    <!--    i can use computed attribute too-->
+    <div :class="boxDClasses" @click="selectBox('D')"></div>
+    bind
+    <!--    other alternative is tu use v-bind="name" v-on:input="setNameVariable"  but v model-->
+    <!--    do both in this two way bind-->
+    <input v-model="name">
+    <!--      there are some event modifiers u can use using .
+    in this case i use prevent default -->
+    <!--    u can replace v-on with @:submit for example-->
+    <!--    u can replace v-bind:value with  :value-->
+    <form v-on:submit.prevent="submitForm">
+        <input type="text">
+        <button> Sing Up</button>
+    </form>
+
+
+    <!--      use reserved word $event if need to pass another paramenter in the event-->
+    <!--      if not only use setName-->
+    name <input type="text" v-on:keyup.enter="confirmInput" v-on:input="setName($event, 'surname')">
+    <p> typed text: {{name}} </p>
+    <p> Confirmed name: {{confirmedName}} </p>
+    <p> computed name: {{fullName}} </p>
+    <p> fullNameWatcher : {{fullNameWatcher}} </p>
+    <button v-on:click.right="addCounter(5)">add</button>
+    <!--      não é uma boa pratica incluir logica, apesar de ser possivel, como o counter++-->
+    <!--      seria melhor incluir uma função add-->
+    <!--      posso tanto chamar com v-on:click="add" como v-on:click="add()"-->
+    <button v-on:click="counter = counter -1">reduce</button>
+    <!--  v-once only loader the variable a single time-->
+    <p v-once>counter {{counter}}</p>
+    <p>counter {{counter}}</p>
+    <p v-html="outputGoal()">{{ courseGoal }}</p>
+    <p>{{ courseGoal }}</p>
+    <!--    its bad to utilize method because in every page changes it was called again-->
+    <!--    and it performs bad-->
+    <p>{{ outputGoal() }}</p>
+    <p>{{ Math.random() }}</p>
+    <!--      mas não consigo incluir coisas complexas como if-->
+    <p>{{ 1 + 1 }}</p>
+    <p>learn More <a v-bind:href="vueLink">teste </a></p>
+</section>
+</body>
+</html>
