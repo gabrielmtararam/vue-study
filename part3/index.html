@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vue Basics</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css"/>
+    <script src="https://unpkg.com/vue@3.4.9/dist/vue.global.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+<header>
+    <h1>Vue Course Goals</h1>
+</header>
+<section id="user-goals">
+    <h2>My course goals</h2>
+    <input v-model="enteredGoalValue" type="text"/>
+    <p>{{message}}</p>
+<!--    ref can be accessed with  this.$refs.userText;-->
+    ref <input ref="userText" type="text">
+    <button @click="setText">setText</button>
+    <button @click="addGoal">Add Goal</button>
+    <!--      i can use && or || in v-if, execute a method or use a property-->
+    <!--     only can use v-else directly element after the v-if
+    u can use v-else-if too
+    -->
+    <p v-if="goals.length === 0 ">No goals have been added yet - please start adding some!</p>
+    <!-- keep the element but hidden with display equals none
+      use only v-show if visibility changes a lot, in other cases use v-if
+      <ul v-show="goals.lenght > 0">  -->
+    <ul v-else>
+<!--         works efficiently only render news, dosent flash the entire list on changes-->
+<!--        <li v-for="goal in goals">{{goal}}</li>-->
+<!--        key attribute used by vue  in v-for is good to use, dont use index because-->
+<!--        it changes, in this case use goal, but use database unique id for example
+            this will keep the text inside the input and dont clean it on changes
+-->
+        <li v-for="(goal, index ) in goals" :key="goal" @click="removeGoal(index)">
+            {{goal}} - {{index}}
+            <!--            click.stop stops propagation so avoid click and remove item-->
+            <input type="text" @click.stop>
+
+        </li>
+    </ul>
+    <ul>
+<!--        <li v-for="(value, key ) in {name:'max', age: 31}">{{value}} {{key}}</li>-->
+        <li v-for="(value, key, index ) in {name:'max', age: 31}">
+            <p>{{value}} {{key}} {{index}}<p>
+        </li>
+    </ul>
+    <ul>
+        <li v-for="number in 3">{{number}}</li>
+    </ul>
+</section>
+<header>
+    <h1>FriendList</h1>
+</header>
+<section id="app2">
+    <ul>
+
+        <friend-contact></friend-contact>
+        <friend-contact></friend-contact>
+    </ul>
+</section>
+<!--<section id="log" class="container">-->
+<!--    <h2>Battle Log</h2>-->
+<!--    <ul>-->
+<!--        <li v-for="logMessage in logMessages">-->
+<!--            <span-->
+<!--                    :class="{'log&#45;&#45;player': logMessage.actionBy === 'player', 'log&#45;&#45;monster': logMessage.actionBy === 'monster'}"-->
+<!--            >{{ logMessage.actionBy === 'player' ? 'Player' : 'Monster'-->
+<!--                }}</span-->
+<!--            >-->
+<!--            <span v-if="logMessage.actionType === 'heal'">-->
+<!--              heals himself for-->
+<!--              <span class="log&#45;&#45;heal">{{ logMessage.actionValue }}</span></span-->
+<!--            >-->
+<!--            <span v-else>-->
+<!--              attacks and deals-->
+<!--              <span class="log&#45;&#45;damage">{{ logMessage.actionValue }}</span>-->
+<!--            </span>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</section>-->
+
+</body>
+</html>

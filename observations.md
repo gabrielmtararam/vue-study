@@ -33,3 +33,52 @@ ao metodo onclick por exemplo
 com vue, defino o resultado final desejado e os dados que serão necessários para ele
 
 ![img.png](img.png)
+
+vue behind the scenes, turns ur data objeto into a reactive data object
+wraping your properties with javascpript feature called proxys
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+![img_1.png](img_1.png)
+
+u can have multiple apps in a single javasscript file
+u can pass a template (a html content to put inside the selector as a string)
+lin '<p> test </p>'
+
+![img_2.png](img_2.png)
+
+![img_3.png](img_3.png)
+
+
+
+If you control multiple, independent parts of HTML pages, you will often work with multiple Vue apps (i.e. you create multiple apps by calling createApp() more than once).
+
+On the other hand, if you're building a SPA, you typically work with just one "root app" (i.e. createApp() is only used once in your entire codebase) and you instead build up a user interface with multiple components.
+
+You absolutely are allowed to also use components in cases where you have multiple Vue apps but you typically won't use multiple Vue apps if you build one big connected user interface.
+
+
+sudo apt install nodejs
+sudo apt install npm
+sudo nodejs -v
+sudo npm -v
+sudo npm install -g @vue/cli
+vue create vue-first-app
+cd vue-first-app
+npm run serve
+npm install
+
+
+avaliar no lugar vue cli
+npm init vue
+
+![img_4.png](img_4.png)
+
+Props and events added on a custom component tag automatically fall through to the root component in the template of that component. In the above example, type and @click get added to the <button> in the BaseButton component.
+
+You can get access to these fallthrough props on a built-in $attrs property (e.g. this.$attrs).
+
+![img_5.png](img_5.png)
+
+if u use a componente oly once the name shoube be TheSideBar and not SideBar
+its better to create subfolders in components folder
+
+![img_6.png](img_6.png)
