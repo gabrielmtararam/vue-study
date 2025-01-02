@@ -23,6 +23,7 @@
   <teleport to="body">
     <course-goals>
   <!--    u can use any name to slotProps, its the object where all  slot props will be available-->
+<!--      # is the same as use v:slot -->
       <template #default="slotProps">
         <h2>{{ slotProps.item }}</h2>
         <h3> {{slotProps['anotherProp']}}</h3>
